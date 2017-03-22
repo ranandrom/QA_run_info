@@ -32,7 +32,7 @@ public class QA_run_info {
 		System.out.println("程序开始时间: "+now_star.getTime());
 		System.out.println("程序开始时间: "+formatter_star.format(now_star.getTime()));
 		System.out.println("===============================================");
-		System.out.println("QA_run_info.1.7.1");
+		System.out.println("QA_run_info.1.7.2");
 		//System.out.println();
 		System.out.println("***********************************************");
 		System.out.println();
@@ -119,6 +119,9 @@ public class QA_run_info {
             Thread.sleep(500);
         }
 		
+		Thread.sleep(3000);
+		Upload_File(dir);//上传文件
+		
 		Calendar now_end = Calendar.getInstance();
 		SimpleDateFormat formatter_end = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		System.out.println();
@@ -126,6 +129,18 @@ public class QA_run_info {
 		System.out.println("程序结束时间: "+now_end.getTime());
 		System.out.println("程序结束时间: "+formatter_end.format(now_end.getTime()));
 		System.out.println();
+	}
+	
+	//上传文件
+	public static void Upload_File(String PutPath)
+	{
+		String cmd = "/opt/local/bin/python35/python /var/script/alan/10k_api_script/qa_run_info_collections.py -path " + PutPath;
+		try{
+			Runtime.getRuntime().exec(cmd);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	//获取最新文件所在目录
