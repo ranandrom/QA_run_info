@@ -34,7 +34,7 @@ import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 
 public class Data_Aggregation {
-	public static void Data_Aggregation_Main(String dir, String Path, int Cover, String PutPath, int Uploadtag ){
+	public static void Data_Aggregation_Main(String dir, String Path, int Cover, String PutPath, int Uploadtag, int Upload ){
 		System.out.println();
 		Calendar now_star = Calendar.getInstance();
 		SimpleDateFormat formatter_star = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -254,20 +254,10 @@ public class Data_Aggregation {
 		}
 		
 		//上传所有文件到\\wdmycloud
-		for(int i = 0; i < File_List.size(); i++){
-			//SSh_Upload_File(File_List.get(i), PutPath);
-		}
-		
-		//上传血浆文件到云端前端
-		for(int i = 0; i < Plasma_Porject_File_List.size(); i++){
-			String Str_Plasma_Porject[] = Plasma_Porject_File_List.get(i).split("\t");
-			//Upload_File(Str_Plasma_Porject[1], Str_Plasma_Porject[0]);
-		}
-				
-		//上传组织文件到云端前端
-		for(int i = 0; i < Tissue_Porject_File_List.size(); i++){
-			String Str_Tissue_Porject[] = Tissue_Porject_File_List.get(i).split("\t");
-			//Upload_File(Str_Tissue_Porject[1], Str_Tissue_Porject[0]);
+		if( Upload == 1 ){
+			for(int i = 0; i < File_List.size(); i++){
+				SSh_Upload_File(File_List.get(i), PutPath);
+			}
 		}
 		
 		Calendar now_end = Calendar.getInstance();
@@ -279,7 +269,7 @@ public class Data_Aggregation {
 		System.out.println();
 	}
 	
-/*	//获取项目表中的(log2(CPM+1)列数据
+	/*//获取项目表中的(log2(CPM+1)列数据
 	public static ArrayList<String> WMstat_File_Path(String filename)
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -351,19 +341,6 @@ public class Data_Aggregation {
 			e.printStackTrace();
 		}
 		return All_File_Path;
-	}
-	
-	//上传文件
-	public static void Upload_File(String Porject_Name, String data_file){
-		String Account = "admin";
-		String Password = "admin123456";
-		String cmd = "/opt/local/bin/python35/python /var/script/alan/10k_api_script/10kmop_api_scirpt.py " + "-account " + Account + " -password " + Password + " -p_name " + Porject_Name + " -data_file " + data_file;
-		try{
-			Runtime.getRuntime().exec(cmd);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	//用SSh上传文件

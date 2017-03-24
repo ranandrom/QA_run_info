@@ -32,7 +32,7 @@ public class QA_run_info {
 		System.out.println("程序开始时间: "+now_star.getTime());
 		System.out.println("程序开始时间: "+formatter_star.format(now_star.getTime()));
 		System.out.println("===============================================");
-		System.out.println("QA_run_info.1.7.2");
+		System.out.println("QA_run_info.1.7.3");
 		//System.out.println();
 		System.out.println("***********************************************");
 		System.out.println();
@@ -43,6 +43,7 @@ public class QA_run_info {
 		int args_len = args.length;
 		int Cover = 1;//0代表覆盖汇总表，1代表追加
 		int Uploadtag = 0;//0代表所有表上传，1代表只上传更新表
+		int Upload = 1;//设置是否需要上传至/wdmycloud/anchordx_cloud/杨莹莹/项目-生信-汇总表/，0代表不上传，1代表上传
 		String dir = "./Ironman";
 		String ExcelFormat = "xlsx";
 		String Input = "/Src_Data1/analysis/Ironman/";
@@ -56,8 +57,10 @@ public class QA_run_info {
 				Cover = Integer.valueOf(args[len+1]);
 			}else if(args[len].equals("-O") || args[len].equals("-o")){
 				dir = args[len+1];
-			}else if(args[len].equals("-U") || args[len].equals("-u")){
+			}else if(args[len].equals("-F") || args[len].equals("-f")){
 				Uploadtag = Integer.valueOf(args[len+1]);
+			}else if(args[len].equals("-U") || args[len].equals("-u")){
+				Upload = Integer.valueOf(args[len+1]);
 			}
 		}
 		
@@ -112,7 +115,7 @@ public class QA_run_info {
         {
             if (exe.isTerminated()) //先让所有的子线程运行完，再运行主线程
             {
-            	Data_Aggregation.Data_Aggregation_Main(dir+"/Data_Aggregation/"+day, Path, Cover, PutPath, Uploadtag);
+            	Data_Aggregation.Data_Aggregation_Main(dir+"/Data_Aggregation/"+day, Path, Cover, PutPath, Uploadtag, Upload);
                 //System.out.println("结束了");
                 break;
             }
@@ -120,7 +123,7 @@ public class QA_run_info {
         }
 		
 		Thread.sleep(3000);
-		Upload_File(dir);//上传文件
+		Upload_File(dir);//上传文件到阿里云端
 		
 		Calendar now_end = Calendar.getInstance();
 		SimpleDateFormat formatter_end = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
