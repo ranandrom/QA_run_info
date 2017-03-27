@@ -293,7 +293,7 @@ class SubThread extends Thread
 							File Unknown_excel = new File(Unknown_Excel);
 							my_mkdir(Por_dir);
 							
-							if(!Plasma_excel.exists() && !Plasma_excel.isFile()){
+							/*if(!Plasma_excel.exists() && !Plasma_excel.isFile()){
 								CreateXlsx(Plasma_excel);//创建血浆表
 							}
 							if(!Tissue_excel.exists() && !Tissue_excel.isFile()){
@@ -301,7 +301,11 @@ class SubThread extends Thread
 							}
 							if(!Unknown_excel.exists() && !Unknown_excel.isFile()){
 								CreateXlsx(Unknown_excel);//不明白的数据表
-							}
+							}*/
+							
+							CreateXlsx(Plasma_excel);//创建血浆表
+							CreateXlsx(Tissue_excel);//创建组织表
+							CreateXlsx(Unknown_excel);//不明白的数据表
 
 							Excel_main(Plasma_Excel, Tissue_Excel, Unknown_Excel, Plasma_Tsv, Tissue_Tsv, Unknown_Tsv, Path, 1, null);
 						}else{
@@ -333,7 +337,7 @@ class SubThread extends Thread
 			File Unknown_excel = new File(Unknown_Excel);
 			my_mkdir(Por_dir);
 			
-			if(!Plasma_excel.exists() && !Plasma_excel.isFile()){
+			/*if(!Plasma_excel.exists() && !Plasma_excel.isFile()){
 				CreateXlsx(Plasma_excel);//创建血浆表
 			}
 			if(!Tissue_excel.exists() && !Tissue_excel.isFile()){
@@ -341,7 +345,11 @@ class SubThread extends Thread
 			}
 			if(!Unknown_excel.exists() && !Unknown_excel.isFile()){
 				CreateXlsx(Unknown_excel);//不明白的数据表
-			}
+			}*/
+			
+			CreateXlsx(Plasma_excel);//创建血浆表
+			CreateXlsx(Tissue_excel);//创建组织表
+			CreateXlsx(Unknown_excel);//不明白的数据表
 			
 			Excel_main(Plasma_Excel, Tissue_Excel, Unknown_Excel, Plasma_Tsv, Tissue_Tsv, Unknown_Tsv, Path, 1, null);
     	}
@@ -1556,7 +1564,7 @@ class SubThread extends Thread
 				
 				//23 log2(CPM+1)
 				data = null;
-				String cmd23 =  "find " + Input + " -name " + ID_dataArr[0] + "*WM.stat";
+				String cmd23 =  "find " + Input + " -name " + ID_dataArr[0] + "*.WM.*.stat";
 				Process process23 = Runtime.getRuntime().exec(cmd23);
 				BufferedReader input23 = new BufferedReader(new InputStreamReader(process23.getInputStream()));
 				String line23 = null;

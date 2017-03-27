@@ -216,7 +216,13 @@ public class Data_Aggregation {
 					//System.out.println("cmd[t+2]: " + All_File_Path.get(t));
 				}
 				try{
-					Runtime.getRuntime().exec(cmd);
+					//Runtime.getRuntime().exec(cmd);
+					Process process = Runtime.getRuntime().exec(cmd);
+					BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
+					String line = null;
+					while( (line = input.readLine()) != null ){
+						//data.add(line23);
+					}
 				}catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -236,6 +242,7 @@ public class Data_Aggregation {
 			//System.out.println("T0: " + All_File_Path.size());
 			if(All_File_Path.size() != 0 ){
 				//System.out.println("T: "+All_File_Path.size());
+				//System.out.println("+++++++++++++++++++++++++ ");
 				String cmd[] = new String[All_File_Path.size()+2];
 				cmd[0] = "/home/jiacheng_chuan/Ironman/IRONMAN3/ComethylationParser/tag_paste_for_logcpm_for_zhirong.sh";
 				cmd[1] = OutPutfile;
@@ -244,7 +251,13 @@ public class Data_Aggregation {
 					//System.out.println("cmd[t+2]: " + All_File_Path.get(t));
 				}
 				try{
-					Runtime.getRuntime().exec(cmd);
+					//Runtime.getRuntime().exec(cmd);
+					Process process = Runtime.getRuntime().exec(cmd);
+					BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
+					String line = null;
+					while( (line = input.readLine()) != null ){
+						//System.out.println("line: "+line);
+					}
 				}catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -259,6 +272,8 @@ public class Data_Aggregation {
 				SSh_Upload_File(File_List.get(i), PutPath);
 			}
 		}
+		
+		//CreateXlsx(new File(Plasma_File));
 		
 		Calendar now_end = Calendar.getInstance();
 		SimpleDateFormat formatter_end = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
